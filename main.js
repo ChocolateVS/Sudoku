@@ -1,5 +1,5 @@
 let cell;
-let previous = id("1row1"); 
+let previous = id("p"); 
 
 function id(id){return document.getElementById(id)}
 
@@ -87,10 +87,10 @@ function change(val1, val2) {
 function sel(val) {
     cell = id(val);
     
-    console.log(id(val).readOnly);
+    console.log(val);
     if (!id(val).readOnly) {
-        cell.style.backgroundColor = "#b3e0f1";
-        previous.style.backgroundColor = "white";
+        cell.style.backgroundColor = "rgba(150, 150, 150, 0.5)";
+        previous.style.backgroundColor = "rgba(255, 255, 255, 0.5)";
     }
     previous = cell;
 }
@@ -98,8 +98,8 @@ function sel(val) {
 function press(val) {
     if (!id(val).readOnly) {
         if (val > 0) {
-        cell.value = val;
-        change(cell.id, val);
+            cell.value = val;
+            change(cell.id, val);
         } 
         if (val == 0) {
             previous.value = "";
@@ -111,7 +111,7 @@ function press(val) {
 function clearGrid() {
     for (c = 1; c <= 81; c++) {
         id("cell" + c).children[0].children[0].value = "";
-        id("cell" + c).children[0].children[0].style.backgroundColor = "white";
+        id("cell" + c).children[0].children[0].style.backgroundColor = "rgba(255, 255, 255, 0.5)";
         id("cell" + c).children[0].children[0].removeAttribute('readonly');
     }
 }
@@ -197,9 +197,19 @@ function check(sud) {
     
     if (total == 81 && r & c & b) {
         console.log("SUDOKU SOLVED!");
+        id("stat").innerHTML = "SUDOKU SOLVED!";
+        id("stat").style.color = "green";
     }
     else {
-        console.log("ERROR", total, r, c, b);
+        console.log("ERROR NO GOOD", total, r, c, b);
+        if (total == 81) {
+            id("stat").innerHTML = "ERROR NO GOOD FIX YOUR MISTAKES!";
+        }
+        else {
+            id("stat").innerHTML = "SUDOKU NOT COMPLETE!";
+        }
+        
+        id("stat").style.color = "red";
     }
 }
 
@@ -274,7 +284,7 @@ function drawGrid(s) {
             v = e[j];
             id(count).value = v;
             id(count).setAttribute('readonly', true);
-            id(count).style.backgroundColor = "gray";
+            id(count).style.backgroundColor = "rgba(200, 200, 200, 0.5)";
             count++;
         }   
         rowC = 0;
