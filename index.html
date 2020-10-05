@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+        <title>Sudoku</title>
+    </head>
+    <body>  
+        <table class="sudoku">
+            <colgroup><col><col><col>
+            <colgroup><col><col><col>
+            <colgroup><col><col><col>
+            
+            <tbody class="grid" id="grid1">
+              <tr class="row" id="1row1">
+                  <td class="cell" id="cell1"><div class="clear" id="c1"><input type="input" maxlength="1" class="input" id="1" onclick="sel(1)"></div></td>
+                  <td class="cell" id="cell2"><div class="clear" id="c2"><input type="input" maxlength="1" class="input" id="2" onclick="sel(2)"></div></td>
+                  <td class="cell" id="cell3"><div class="clear" id="c3"><input type="input" maxlength="1" class="input" id="3" onclick="sel(3)"></div></td>
+                  <td class="cell" id="cell4"><div class="clear" id="c4"><input type="input" maxlength="1" class="input" id="4" onclick="sel(4)"></div></td>
+                  <td class="cell" id="cell5"><div class="clear" id="c5"><input type="input" maxlength="1" class="input" id="5" onclick="sel(5)"></div></td>
+                  <td class="cell" id="cell6"><div class="clear" id="c6"><input type="input" maxlength="1" class="input" id="6" onclick="sel(6)"></div></td>
+                  <td class="cell" id="cell7"><div class="clear" id="c7"><input type="input" maxlength="1" class="input" id="7" onclick="sel(7)"></div></td>
+                  <td class="cell" id="cell8"><div class="clear" id="c8"><input type="input" maxlength="1" class="input" id="8" onclick="sel(8)"></div></td>
+                  <td class="cell" id="cell9"><div class="clear" id="c9"><input type="input" maxlength="1" class="input" id="9" onclick="sel(9)"></div></td>
+              </tr>
+              <tr class="row" id="1row2">
+                  <td class="cell" id="cell10"><div class="clear" id="c10"><input type="input" maxlength="1" class="input" id="10" onclick="sel(10)"></div></td>
+                  <td class="cell" id="cell11"><div class="clear" id="c11"><input type="input" maxlength="1" class="input" id="11" onclick="sel(11)"></div></td>
+                  <td class="cell" id="cell12"><div class="clear" id="c12"><input type="input" maxlength="1" class="input" id="12" onclick="sel(12)"></div></td>
+                  <td class="cell" id="cell13"><div class="clear" id="c13"><input type="input" maxlength="1" class="input" id="13" onclick="sel(13)"></div></td>
+                  <td class="cell" id="cell14"><div class="clear" id="c14"><input type="input" maxlength="1" class="input" id="14" onclick="sel(14)"></div></td>
+                  <td class="cell" id="cell15"><div class="clear" id="c15"><input type="input" maxlength="1" class="input" id="15" onclick="sel(15)"></div></td>
+                  <td class="cell" id="cell16"><div class="clear" id="c16"><input type="input" maxlength="1" class="input" id="16" onclick="sel(16)"></div></td>
+                  <td class="cell" id="cell17"><div class="clear" id="c17"><input type="input" maxlength="1" class="input" id="17" onclick="sel(17)"></div></td>
+                  <td class="cell" id="cell18"><div class="clear" id="c18"><input type="input" maxlength="1" class="input" id="18" onclick="sel(18)"></div></td>
+              </tr>
+              <tr class="row" id="1row3">
+                  <td class="cell" id="cell19"><div class="clear" id="c19"><input type="input" maxlength="1" class="input" id="19" onclick="sel(19)"></div></td>
+                  <td class="cell" id="cell20"><div class="clear" id="c20"><input type="input" maxlength="1" class="input" id="20" onclick="sel(20)"></div></td>
+                  <td class="cell" id="cell21"><div class="clear" id="c21"><input type="input" maxlength="1" class="input" id="21" onclick="sel(21)"></div></td>
+                  <td class="cell" id="cell22"><div class="clear" id="c22"><input type="input" maxlength="1" class="input" id="22" onclick="sel(22)"></div></td>
+                  <td class="cell" id="cell23"><div class="clear" id="c23"><input type="input" maxlength="1" class="input" id="23" onclick="sel(23)"></div></td>
+                  <td class="cell" id="cell24"><div class="clear" id="c24"><input type="input" maxlength="1" class="input" id="24" onclick="sel(24)"></div></td>
+                  <td class="cell" id="cell25"><div class="clear" id="c25"><input type="input" maxlength="1" class="input" id="25" onclick="sel(25)"></div></td>
+                  <td class="cell" id="cell26"><div class="clear" id="c26"><input type="input" maxlength="1" class="input" id="26" onclick="sel(26)"></div></td>
+                  <td class="cell" id="cell27"><div class="clear" id="c27"><input type="input" maxlength="1" class="input" id="27" onclick="sel(27)"></div></td>
+              </tr>
+            </tbody>
+            <tbody class="grid" id="grid2">
+              <tr class="row" id="2row4">
+                  <td class="cell" id="cell28"><div class="clear" id="c28"><input type="input" maxlength="1" class="input" id="28" onclick="sel(28)"></div></td>
+                  <td class="cell" id="cell29"><div class="clear" id="c29"><input type="input" maxlength="1" class="input" id="29" onclick="sel(29)"></div></td>
+                  <td class="cell" id="cell30"><div class="clear" id="c30"><input type="input" maxlength="1" class="input" id="30" onclick="sel(30)"></div></td>
+                  <td class="cell" id="cell31"><div class="clear" id="c31"><input type="input" maxlength="1" class="input" id="31" onclick="sel(31)"></div></td>
+                  <td class="cell" id="cell32"><div class="clear" id="c32"><input type="input" maxlength="1" class="input" id="32" onclick="sel(32)"></div></td>
+                  <td class="cell" id="cell33"><div class="clear" id="c33"><input type="input" maxlength="1" class="input" id="33" onclick="sel(33)"></div></td>
+                  <td class="cell" id="cell34"><div class="clear" id="c34"><input type="input" maxlength="1" class="input" id="34" onclick="sel(34)"></div></td>
+                  <td class="cell" id="cell35"><div class="clear" id="c35"><input type="input" maxlength="1" class="input" id="35" onclick="sel(35)"></div></td>
+                  <td class="cell" id="cell36"><div class="clear" id="c36"><input type="input" maxlength="1" class="input" id="36" onclick="sel(36)"></div></td>
+              </tr>
+              <tr class="row" id="2row5">
+                  <td class="cell" id="cell37"><div class="clear" id="c37"><input type="input" maxlength="1" class="input" id="37" onclick="sel(37)"></div></td>
+                  <td class="cell" id="cell38"><div class="clear" id="c38"><input type="input" maxlength="1" class="input" id="38" onclick="sel(38)"></div></td>
+                  <td class="cell" id="cell39"><div class="clear" id="c39"><input type="input" maxlength="1" class="input" id="39" onclick="sel(39)"></div></td>
+                  <td class="cell" id="cell40"><div class="clear" id="c40"><input type="input" maxlength="1" class="input" id="40" onclick="sel(40)"></div></td>
+                  <td class="cell" id="cell41"><div class="clear" id="c41"><input type="input" maxlength="1" class="input" id="41" onclick="sel(41)"></div></td>
+                  <td class="cell" id="cell42"><div class="clear" id="c42"><input type="input" maxlength="1" class="input" id="42" onclick="sel(42)"></div></td>
+                  <td class="cell" id="cell43"><div class="clear" id="c43"><input type="input" maxlength="1" class="input" id="43" onclick="sel(43)"></div></td>
+                  <td class="cell" id="cell44"><div class="clear" id="c44"><input type="input" maxlength="1" class="input" id="44" onclick="sel(44)"></div></td>
+                  <td class="cell" id="cell45"><div class="clear" id="c45"><input type="input" maxlength="1" class="input" id="45" onclick="sel(45)"></div></td>
+              </tr>
+              <tr class="row" id="2row6">
+                  <td class="cell" id="cell46"><div class="clear" id="c46"><input type="input" maxlength="1" class="input" id="46" onclick="sel(46)"></div></td>
+                  <td class="cell" id="cell47"><div class="clear" id="c47"><input type="input" maxlength="1" class="input" id="47" onclick="sel(47)"></div></td>
+                  <td class="cell" id="cell48"><div class="clear" id="c48"><input type="input" maxlength="1" class="input" id="48" onclick="sel(48)"></div></td>
+                  <td class="cell" id="cell49"><div class="clear" id="c49"><input type="input" maxlength="1" class="input" id="49" onclick="sel(49)"></div></td>
+                  <td class="cell" id="cell50"><div class="clear" id="c50"><input type="input" maxlength="1" class="input" id="50" onclick="sel(50)"></div></td>
+                  <td class="cell" id="cell51"><div class="clear" id="c51"><input type="input" maxlength="1" class="input" id="51" onclick="sel(51)"></div></td>
+                  <td class="cell" id="cell52"><div class="clear" id="c52"><input type="input" maxlength="1" class="input" id="52" onclick="sel(52)"></div></td>
+                  <td class="cell" id="cell53"><div class="clear" id="c53"><input type="input" maxlength="1" class="input" id="53" onclick="sel(53)"></div></td>
+                  <td class="cell" id="cell54"><div class="clear" id="c54"><input type="input" maxlength="1" class="input" id="54" onclick="sel(54)"></div></td>
+              </tr>
+            </tbody>
+            <tbody class="grid" id="grid3">
+              <tr class="row" id="3row7">
+                  <td class="cell" id="cell55"><div class="clear" id="c55"><input type="input" maxlength="1" class="input" id="55" onclick="sel(55)"></div></td>
+                  <td class="cell" id="cell56"><div class="clear" id="c56"><input type="input" maxlength="1" class="input" id="56" onclick="sel(56)"></div></td>
+                  <td class="cell" id="cell57"><div class="clear" id="c57"><input type="input" maxlength="1" class="input" id="57" onclick="sel(57)"></div></td>
+                  <td class="cell" id="cell58"><div class="clear" id="c58"><input type="input" maxlength="1" class="input" id="58" onclick="sel(58)"></div></td>
+                  <td class="cell" id="cell59"><div class="clear" id="c59"><input type="input" maxlength="1" class="input" id="59" onclick="sel(59)"></div></td>
+                  <td class="cell" id="cell60"><div class="clear" id="c60"><input type="input" maxlength="1" class="input" id="60" onclick="sel(60)"></div></td>
+                  <td class="cell" id="cell61"><div class="clear" id="c61"><input type="input" maxlength="1" class="input" id="61" onclick="sel(61)"></div></td>
+                  <td class="cell" id="cell62"><div class="clear" id="c62"><input type="input" maxlength="1" class="input" id="62" onclick="sel(62)"></div></td>
+                  <td class="cell" id="cell63"><div class="clear" id="c63"><input type="input" maxlength="1" class="input" id="63" onclick="sel(63)"></div></td>
+                </tr>
+              <tr class="row" id="3row8">
+                  <td class="cell" id="cell64"><div class="clear" id="c64"><input type="input" maxlength="1" class="input" id="64" onclick="sel(64)"></div></td>
+                  <td class="cell" id="cell65"><div class="clear" id="c65"><input type="input" maxlength="1" class="input" id="65" onclick="sel(65)"></div></td>
+                  <td class="cell" id="cell66"><div class="clear" id="c66"><input type="input" maxlength="1" class="input" id="66" onclick="sel(66)"></div></td>
+                  <td class="cell" id="cell67"><div class="clear" id="c67"><input type="input" maxlength="1" class="input" id="67" onclick="sel(67)"></div></td>
+                  <td class="cell" id="cell68"><div class="clear" id="c68"><input type="input" maxlength="1" class="input" id="68" onclick="sel(68)"></div></td>
+                  <td class="cell" id="cell69"><div class="clear" id="c69"><input type="input" maxlength="1" class="input" id="69" onclick="sel(69)"></div></td>
+                  <td class="cell" id="cell70"><div class="clear" id="c70"><input type="input" maxlength="1" class="input" id="70" onclick="sel(70)"></div></td>
+                  <td class="cell" id="cell71"><div class="clear" id="c71"><input type="input" maxlength="1" class="input" id="71" onclick="sel(71)"></div></td>
+                  <td class="cell" id="cell72"><div class="clear" id="c72"><input type="input" maxlength="1" class="input" id="72" onclick="sel(72)"></div></td>
+              </tr>
+              <tr class="row" id="3row9">
+                  <td class="cell" id="cell73"><div class="clear" id="c73"><input type="input" maxlength="1" class="input" id="73" onclick="sel(73)"></div></td>
+                  <td class="cell" id="cell74"><div class="clear" id="c74"><input type="input" maxlength="1" class="input" id="74" onclick="sel(74)"></div></td>
+                  <td class="cell" id="cell75"><div class="clear" id="c75"><input type="input" maxlength="1" class="input" id="75" onclick="sel(75)"></div></td>
+                  <td class="cell" id="cell76"><div class="clear" id="c76"><input type="input" maxlength="1" class="input" id="76" onclick="sel(76)"></div></td>
+                  <td class="cell" id="cell77"><div class="clear" id="c77"><input type="input" maxlength="1" class="input" id="77" onclick="sel(77)"></div></td>
+                  <td class="cell" id="cell78"><div class="clear" id="c78"><input type="input" maxlength="1" class="input" id="78" onclick="sel(78)"></div></td>
+                  <td class="cell" id="cell79"><div class="clear" id="c79"><input type="input" maxlength="1" class="input" id="79" onclick="sel(79)"></div></td>
+                  <td class="cell" id="cell80"><div class="clear" id="c80"><input type="input" maxlength="1" class="input" id="80" onclick="sel(80)"></div></td>
+                  <td class="cell" id="cell81"><div class="clear" id="c81"><input type="input" maxlength="1" class="input" id="81" onclick="sel(81)"></div></td>
+              </tr>
+            </tbody>
+            <!-- tbody[class="grid" id=$]>tr*3>td[class="cell" id=$]*9 
+            tbody[class="grid" id="1"]*3>tr[class="row" id=$]*3>td[class="cell" id=$]*9>input[class="input" id=$ type="input" maxlength="1" onclick="sel($, $)"]-->
+        </table>
+        <table  class="keypad">
+            <colgroup><col><col><col>
+            <colgroup><col><col><col>
+            <colgroup><col><col><col>
+            <tbody>    
+                <tr class="trnum">
+                    <td><input type="button" class="num" id="press1" value="1" onclick="press(1)"></td>
+                    <td><input type="button" class="num" id="press2" value="2" onclick="press(2)"></td>  
+                    <td><input type="button" class="num" id="press3" value="3" onclick="press(3)"></td>
+                </tr>
+                <tr class="trnum">    
+                    <td><input type="button" class="num" id="press4" value="4" onclick="press(4)"></td>    
+                    <td><input type="button" class="num" id="press5" value="5" onclick="press(5)"></td>  
+                    <td><input type="button" class="num" id="press6" value="6" onclick="press(6)"></td>
+                </tr>
+                <tr class="trnum">    
+                    <td><input type="button" class="num" id="press7" value="7" onclick="press(7)"></td> 
+                    <td><input type="button" class="num" id="press8" value="8" onclick="press(8)"></td>
+                    <td><input type="button" class="num" id="press9" value="9" onclick="press(9)"></td>
+                </tr>
+        </table>
+        <div class="options" id="options">
+            <input type="button" class="op" id="pressX" value="UNDO" onclick="doUndo()">
+            <input type="button" class="op" id="pressX" value="REDO" onclick="doRedo()">
+            <input type="button" class="op" id="pressX" value="CHECK" onclick="check(grid)">
+            <input type="button" class="op" id="pressX" value="GENERATE" onclick="gen()">
+            <input type="button" class="op" id="pressX" value="AUTO SOLVE" onclick="solve()">
+            <input type="button" class="op" id="pressX" value="CLEAR GRID" onclick="clearGrid()">
+        </div>
+        
+    </body>
+    <script src="main.js"></script>
+    <script src="grid.js"></script>
+</html>

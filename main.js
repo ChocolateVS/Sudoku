@@ -1,0 +1,299 @@
+/////COLUMN IS X
+/////ROW IS YYYYYYYYYYYY
+let selectedX;
+let selectedY;
+let section;
+let cell;
+let previous = id("1row1"); 
+
+let cellsused = [];
+cellsused.length = 81;
+
+let numused = [];
+numused.length = 9;
+
+function fillEmpty(g) {
+    for (i = 0; i < 9; i++) {
+        for (j = 0; j < 9; j++) {
+            g.rows[i][j] = "";
+        }
+        for (j = 0; j < 9; j++) {
+            g.columns[i][j] = "";
+        }
+        for (j = 0; j < 9; j++) {
+            g.boxes[i][j] = "";
+        }
+    }
+}
+let grid = {
+    rows:[[], [], [], [], [], [], [], [], []],
+    columns:[[], [], [], [], [], [], [], [], []],
+    boxes:[[], [], [], [], [], [], [], [], []]
+}
+fillEmpty(grid);
+
+let defSud = {
+    rows:[
+        ["1", "3", "5", "7", "9", "2", "4", "6", "8"],
+        ["6", "8", "4", "1", "3", "5", "2", "9", "7"],
+        ["2", "9", "7", "6", "8", "4", "1", "3", "5"],
+        ["5", "1", "3", "9", "2", "7", "8", "4", "6"],
+        ["4", "7", "8", "3", "1", "6", "5", "2", "9"],
+        ["9", "2", "6", "5", "4", "8", "3", "7", "1"],
+        ["3", "5", "1", "4", "7", "9", "6", "8", "2"],
+        ["8", "4", "9", "2", "6", "1", "7", "5", "3"],
+        ["7", "6", "2", "8", "5", "3", "9", "1", "4"],
+    ],
+    columns:[
+        ["1", "6", "2", "5", "4", "9", "3", "8", "7"],
+        ["3", "8", "9", "1", "7", "2", "5", "4", "6"],
+        ["5", "4", "7", "3", "8", "6", "1", "9", "2"],
+        ["7", "1", "6", "9", "3", "5", "4", "2", "8"],
+        ["9", "3", "8", "2", "1", "4", "7", "6", "5"],
+        ["2", "5", "4", "7", "6", "8", "9", "1", "3"],
+        ["4", "2", "1", "8", "5", "3", "6", "7", "9"],
+        ["6", "9", "3", "4", "2", "7", "8", "5", "1"],
+        ["8", "7", "5", "6", "9", "1", "2", "3", "4"],
+    ],
+    boxes:[
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+    ]
+}
+
+document.querySelectorAll('.input').forEach(item => {
+    item.addEventListener('input', changed, event); 
+});
+
+let nums = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+function changed() {
+    let e = event.target.value;
+    if (nums.includes(e)) {
+        change(event.target.id, e);
+    }
+    else {
+        id(event.target.id).value = "";
+    }
+}
+
+function change(val1, val2) {
+    let cellN = val1;
+    let cellV = val2;
+    let cellC = ((cellN - 1) % 9);
+    let cellR = Math.floor(cellN / 9.1);
+    let cellBC = Math.floor(cellC / 3); 
+    let cellBR = Math.floor(cellR / 3); 
+    let cellB = cellBC + (cellBR*3);
+    let cellBX = ((cellN - 1) % 3);
+    let cellBY = ((cellR) % 3);//Math.floor((cellC) / 3);
+    let cellBN = cellBX + (cellBY * 3);
+ 
+    grid.columns[cellC][cellR] = cellV;
+    grid.rows[cellR][cellC] = cellV;
+    grid.boxes[cellB][cellBN] = cellV;
+}
+function id(id){return document.getElementById(id)}
+
+function sel(val) {
+    if (id("cell" + val).children[0].children[0].readonly == false) {
+        previous.style.backgroundColor = "white";
+        cell = id("cell" + val).children[0].children[0];
+        cell.style.backgroundColor = "#b3e0f1";
+        previous = cell;
+    }
+}
+
+function press(val) {
+    if (val > 0) {
+        cell.value = val;
+        change(cell.id, val);
+        //cell = "";
+    } 
+    if (val == 0) {
+        previous.value = "";
+        change(cell.id, "");
+        //cell = "";
+    }
+}
+
+function clearGrid() {
+    for (c = 1; c <= 81; c++) {
+        id("cell" + c).children[0].children[0].value = "";
+    }
+}
+
+function doUndo(){
+  document.execCommand('undo', false, null);
+}
+
+function doRedo(){
+  document.execCommand('redo', false, null);
+}
+
+function randomNum(r) {
+    return Math.floor(Math.random() * r) + 1;
+}
+        
+function fill() {
+    for (i = 0; i < 81; i++) {
+        var val = randomNum(9);
+        id("cell" + (i + 1)).children[0].value = val;
+    }
+}
+
+function check(sud) {
+    let r = true;
+    let c = true;
+    let b = true;
+    let total = 0;
+    //Check Rows
+    for (i = 0; i < 9; i++) {
+        let arr = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+        arr.length = 9;
+        sud.rows[i].forEach(e => {
+           if (e != "") {
+               total++;
+           }
+           arr[e - 1] += 1; 
+        });
+        count = 0;
+        arr.forEach(e => {
+            count++;
+            if (e > 1) {
+                console.log("Invalid Row", i, "Found: ", e, count, "'s");
+                r = false;
+            }    
+        });
+    }
+    
+    //Check Cols
+    for (i = 0; i < 9; i++) {
+        let arr = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+        arr.length = 9;
+        sud.columns[i].forEach(e => {
+           arr[e - 1] += 1; 
+        });
+        count = 0;
+        arr.forEach(e => {
+            count++;
+            if (e > 1) {
+                console.log("Invalid Column", i, "Found: ", e, count, "'s");
+                r = false;
+            } 
+        });
+    }
+            
+    //Check Boxes
+    for (i = 0; i < 9; i++) {
+        let arr = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+        arr.length = 9;
+        sud.boxes[i].forEach(e => {
+           arr[e - 1] += 1; 
+        });
+        count = 0;
+        arr.forEach(e => {
+            count++;
+            if (e > 1) {
+                console.log("Invalid Box", i, "Found: ", e, count, "'s");
+                r = false;
+            } 
+        });
+    }
+    
+    if (total == 81 && r & c & b) {
+        console.log("SUDOKU SOLVED!");
+    }
+    else {
+        console.log("ERROR", total, r, c, b);
+    }
+}
+console.log(defSud);
+
+function gen() {
+    for (i = 0; i < 100; i++) {
+        let type = randomNum(2); 
+        let swapbox = randomNum(3) - 1;
+        let swap1 = randomNum(3) - 1;
+        let swap2 = randomNum(3) - 1;
+        let col1 = swap1 + (3 * swapbox);
+        let col2 = swap2 + (3 * swapbox);
+        
+        //console.log(" Type: ", type, "\n", "Box: ", swapbox, "\n", "Column 1: ", swap1, "\n", "Column 2: ", swap2, "\n", "Col 1: ", col1, "\n", "Col 2: ", col2);
+        if (type == 2) {
+            //Swap Row
+            //console.log("Swapping Rows: ", col1, "&", col2, "in box", swapbox);
+
+            let tempR = defSud.rows[col1];
+            defSud.rows[col1] = defSud.rows[col2];
+            defSud.rows[col2] = tempR;
+            for (z = 0; z < 9; z++) {
+                let tempC = defSud.columns[z][col1];
+                defSud.columns[z][col1] = defSud.columns[z][col2];
+                defSud.columns[z][col2] = tempC;
+            }
+        }
+        else if (type == 1) {
+            //Swap Col
+            //console.log("Swapping Columns: ", col1, "&", col2, "in box", swapbox);
+
+            let tempC1 = defSud.columns[col1];
+            defSud.columns[col1] = defSud.columns[col2];
+            defSud.columns[col2] = tempC1;
+            for (r = 0; r < 9; r++) {
+                let tempR2 = defSud.rows[r][col1];
+                defSud.rows[r][col1] = defSud.rows[r][col2];
+                defSud.rows[r][col2] = tempR2;
+            }
+        }
+    }   
+    //FILL BOXES
+    let count = 0;
+    for (j = 0; j < 3; j++) {
+        for (i = 0; i < 3; i++) {
+            defSud.rows[i + (3 * j)].forEach(e => {
+                if (count < 3) {
+                    defSud.boxes[0 + (3 * j)][count + (3 * i)] = e;
+                } 
+                else if (count > 2 && count < 6) {
+                    defSud.boxes[1 + (3 * j)][count - 3 + (3 * i)] = e;
+                }
+                else if (count > 5) {
+                    defSud.boxes[2 + (3 * j)][count - 6 + (3 * i)] = e;
+                }
+                count++;
+            });
+            count = 0;
+        }
+    }
+    drawGrid(defSud);
+}
+
+function swap(g, i, i2) {  
+    var s = g[i];
+    g[i] = g[i2];
+    g[i2] = s;
+    console.log(g);
+}
+
+function drawGrid(s) {
+    grid = defSud;
+    let count = 1;
+    let rowC = 0;
+    s.rows.forEach(e => {
+        for (j = 0; j < 9; j++) {
+            v = e[j];
+            id(count).value = v;
+            id(count).setAttribute('readonly', true);
+            id(count).style.backgroundColor = "gray";
+            count++;
+        }   
+        rowC = 0;
+    });
+}
