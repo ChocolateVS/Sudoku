@@ -1,6 +1,7 @@
 let cell;
 let previous = id("p"); 
 
+let solved = "";
 function id(id){return document.getElementById(id)}
 
 function fillEmpty(g) {
@@ -22,6 +23,7 @@ let grid = {
     columns:[[], [], [], [], [], [], [], [], []],
     boxes:[[], [], [], [], [], [], [], [], []]
 }
+    
 fillEmpty(grid);
 
 document.querySelectorAll('.input').forEach(item => {
@@ -61,8 +63,8 @@ function sel(val) {
     
     console.log(val);
     if (!id(val).readOnly) {
-        cell.style.backgroundColor = "rgba(150, 150, 150, 0.5)";
-        previous.style.backgroundColor = "rgba(255, 255, 255, 0.5)";
+        //cell.style.backgroundColor = "rgba(150, 150, 150, 0.5)";
+        //previous.style.backgroundColor = "rgba(255, 255, 255, 0.5)";
     }
     previous = cell;
 }
@@ -213,6 +215,55 @@ function gen() {
             [], [], [], [], [], [], [], [], []
         ]
     }
+    
+    //SWAP A BUNCH OF RANDOM NUMBERS
+    for (i = 0; i < 9; i++) {
+        let num1 = randomNum(9);
+        let num2 = randomNum(9);
+        for (i = 0; i < 9; i++) {
+            for (j = 0; j < 9; j++) {
+                if (defSud.rows[i][j] == num1) {
+                    defSud.rows[i][j] = "0";
+                }
+            }
+        }
+        for (i = 0; i < 9; i++) {
+            for (j = 0; j < 9; j++) {
+                if (defSud.rows[i][j] == num2) {
+                    defSud.rows[i][j] = num1.toString();
+                }
+            }
+        }
+        for (i = 0; i < 9; i++) {
+            for (j = 0; j < 9; j++) {
+                if (defSud.rows[i][j] == "0") {
+                    defSud.rows[i][j] = num2.toString();
+                }
+            }
+        }
+        for (i = 0; i < 9; i++) {
+            for (j = 0; j < 9; j++) {
+                if (defSud.columns[i][j] == num1) {
+                    defSud.columns[i][j] = "0";
+                }
+            }
+        }
+        for (i = 0; i < 9; i++) {
+            for (j = 0; j < 9; j++) {
+                if (defSud.columns[i][j] == num2) {
+                    defSud.columns[i][j] = num1.toString();
+                }
+            }
+        }
+        for (i = 0; i < 9; i++) {
+            for (j = 0; j < 9; j++) {
+                if (defSud.columns[i][j] == "0") {
+                    defSud.columns[i][j] = num2.toString();
+                }
+            }
+        }
+    }
+    
     //REMOVE A BUNCH OF THINGS
     let numR = 81 - (40 - randomNum(20));
     
@@ -230,8 +281,8 @@ function gen() {
         }
     }
     
-    //SWAP A BUNCH OF NUMBERS
-    for (i = 0; i < 100; i++) {
+    //SWAP A BUNCH OF ROWS AND COLUMNS
+    for (i = 0; i < 300; i++) {
         let type = randomNum(2); 
         let swapbox = randomNum(3) - 1;
         let swap1 = randomNum(3) - 1;
@@ -305,7 +356,7 @@ function drawGrid(s) {
                 id(count).style.backgroundColor = "rgba(200, 200, 200, 0.5)";
             }
             else {
-                id(count).setAttribute('readonly', false);
+                id(count).removeAttribute('readonly');
                 id(count).style.backgroundColor = "rgba(255, 255, 255, 0.5)";
             }
             count++;
