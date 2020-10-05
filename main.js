@@ -265,8 +265,8 @@ function gen() {
     }
     
     //REMOVE A BUNCH OF THINGS
-    let numR = 81 - (40 - randomNum(20));
-    
+    let diff = id("diff").value;
+    let numR = diff;
     let used = [];
     for (i = 0; i < numR; i++) {
         let cellRand = randomNum(81);
@@ -316,11 +316,7 @@ function gen() {
             }
         }
     }   
-    
-    //REMOVE SOME STUFF :)
-    randomNum();
-    
-    
+
     //FILL BOXES
     let count = 0;
     for (j = 0; j < 3; j++) {
@@ -341,6 +337,12 @@ function gen() {
         }
     }
     drawGrid(defSud);
+}
+
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function drawGrid(s) {
