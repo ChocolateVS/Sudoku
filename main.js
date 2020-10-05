@@ -102,12 +102,14 @@ function change(val1, val2) {
 function id(id){return document.getElementById(id)}
 
 function sel(val) {
-    if (id("cell" + val).children[0].children[0].readonly == false) {
-        previous.style.backgroundColor = "white";
-        cell = id("cell" + val).children[0].children[0];
+    cell = id(val);
+    
+    console.log(id(val).readOnly);
+    if (!id(val).readOnly) {
         cell.style.backgroundColor = "#b3e0f1";
-        previous = cell;
+        previous.style.backgroundColor = "white";
     }
+    previous = cell;
 }
 
 function press(val) {
