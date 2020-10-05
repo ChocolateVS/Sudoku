@@ -1,16 +1,7 @@
-/////COLUMN IS X
-/////ROW IS YYYYYYYYYYYY
-let selectedX;
-let selectedY;
-let section;
 let cell;
 let previous = id("1row1"); 
 
-let cellsused = [];
-cellsused.length = 81;
-
-let numused = [];
-numused.length = 9;
+function id(id){return document.getElementById(id)}
 
 function fillEmpty(g) {
     for (i = 0; i < 9; i++) {
@@ -25,6 +16,7 @@ function fillEmpty(g) {
         }
     }
 }
+
 let grid = {
     rows:[[], [], [], [], [], [], [], [], []],
     columns:[[], [], [], [], [], [], [], [], []],
@@ -56,15 +48,7 @@ let defSud = {
         ["8", "7", "5", "6", "9", "1", "2", "3", "4"],
     ],
     boxes:[
-        [],
-        [],
-        [],
-        [],
-        [],
-        [],
-        [],
-        [],
-        []
+        [], [], [], [], [], [], [], [], []
     ]
 }
 
@@ -99,7 +83,6 @@ function change(val1, val2) {
     grid.rows[cellR][cellC] = cellV;
     grid.boxes[cellB][cellBN] = cellV;
 }
-function id(id){return document.getElementById(id)}
 
 function sel(val) {
     cell = id(val);
@@ -113,21 +96,23 @@ function sel(val) {
 }
 
 function press(val) {
-    if (val > 0) {
+    if (!id(val).readOnly) {
+        if (val > 0) {
         cell.value = val;
         change(cell.id, val);
-        //cell = "";
-    } 
-    if (val == 0) {
-        previous.value = "";
-        change(cell.id, "");
-        //cell = "";
+        } 
+        if (val == 0) {
+            previous.value = "";
+            change(cell.id, "");
+        }    
     }
 }
 
 function clearGrid() {
     for (c = 1; c <= 81; c++) {
         id("cell" + c).children[0].children[0].value = "";
+        id("cell" + c).children[0].children[0].style.backgroundColor = "white";
+        id("cell" + c).children[0].children[0].removeAttribute('readonly');
     }
 }
 
@@ -155,6 +140,7 @@ function check(sud) {
     let c = true;
     let b = true;
     let total = 0;
+    
     //Check Rows
     for (i = 0; i < 9; i++) {
         let arr = [0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -216,7 +202,6 @@ function check(sud) {
         console.log("ERROR", total, r, c, b);
     }
 }
-console.log(defSud);
 
 function gen() {
     for (i = 0; i < 100; i++) {
@@ -231,7 +216,6 @@ function gen() {
         if (type == 2) {
             //Swap Row
             //console.log("Swapping Rows: ", col1, "&", col2, "in box", swapbox);
-
             let tempR = defSud.rows[col1];
             defSud.rows[col1] = defSud.rows[col2];
             defSud.rows[col2] = tempR;
@@ -244,7 +228,6 @@ function gen() {
         else if (type == 1) {
             //Swap Col
             //console.log("Swapping Columns: ", col1, "&", col2, "in box", swapbox);
-
             let tempC1 = defSud.columns[col1];
             defSud.columns[col1] = defSud.columns[col2];
             defSud.columns[col2] = tempC1;
@@ -255,6 +238,11 @@ function gen() {
             }
         }
     }   
+    
+    //REMOVE SOME STUFF :)
+    randomNum();
+    
+    
     //FILL BOXES
     let count = 0;
     for (j = 0; j < 3; j++) {
@@ -275,13 +263,6 @@ function gen() {
         }
     }
     drawGrid(defSud);
-}
-
-function swap(g, i, i2) {  
-    var s = g[i];
-    g[i] = g[i2];
-    g[i2] = s;
-    console.log(g);
 }
 
 function drawGrid(s) {
