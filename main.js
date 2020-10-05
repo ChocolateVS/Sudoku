@@ -52,6 +52,8 @@ let defSud = {
     ]
 }
 
+let backup = defSud;
+
 document.querySelectorAll('.input').forEach(item => {
     item.addEventListener('input', changed, event); 
 });
@@ -214,6 +216,25 @@ function check(sud) {
 }
 
 function gen() {
+    defSud = backup;
+    //REMOVE A BUNCH OF THINGS
+    let numR = 81 - (40 - randomNum(20));
+    
+    
+    let used = [];
+    for (i = 0; i < numR; i++) {
+        let cellRand = randomNum(81);
+        if (!used.includes(cellRand)) {
+            used.push(cellRand);
+            //GET CELL COL / ROW
+            let cellC = ((cellRand - 1) % 9);
+            let cellR = Math.floor(cellRand / 9.1);
+            
+            defSud.columns[cellC][cellR] = "";
+            defSud.rows[cellR][cellC] = "";
+        }
+    }
+    
     for (i = 0; i < 100; i++) {
         let type = randomNum(2); 
         let swapbox = randomNum(3) - 1;
