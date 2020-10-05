@@ -220,7 +220,6 @@ function gen() {
     //REMOVE A BUNCH OF THINGS
     let numR = 81 - (40 - randomNum(20));
     
-    
     let used = [];
     for (i = 0; i < numR; i++) {
         let cellRand = randomNum(81);
@@ -235,6 +234,7 @@ function gen() {
         }
     }
     
+    //SWAP A BUNCH OF NUMBERS
     for (i = 0; i < 100; i++) {
         let type = randomNum(2); 
         let swapbox = randomNum(3) - 1;
@@ -304,8 +304,10 @@ function drawGrid(s) {
         for (j = 0; j < 9; j++) {
             v = e[j];
             id(count).value = v;
-            id(count).setAttribute('readonly', true);
-            id(count).style.backgroundColor = "rgba(200, 200, 200, 0.5)";
+            if (v != ""){
+                id(count).setAttribute('readonly', true);
+                id(count).style.backgroundColor = "rgba(200, 200, 200, 0.5)";
+            }
             count++;
         }   
         rowC = 0;
