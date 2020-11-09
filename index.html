@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <!-- Title, Meta-data and links for css and favicon -->
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
         <link rel="icon" type="image/ico" href="favicon.ico">
-        
         <title>Sudoku</title>
     </head>
     <body>  
+       <!-- OPTIONS PANEL -->
        <div class="container">
             <div class="opDiv">
                 <div class="options" id="options">
+                    <!-- Options -->
                     <input type="button" class="op" id="pressX" value="UNDO" onclick="doUndo()">
                     <input type="button" class="op" id="pressX" value="REDO" onclick="doRedo()">
                     <input type="button" class="op" id="pressX" value="CHECK" onclick="check(grid)">
@@ -25,13 +27,21 @@
                     </select>
                 </div>
             </div>
-        
+            <!-- SUDOKO GRID -->
             <div class="gridDiv">
                 <table class="sudoku">
+                    <!-- GRID LAYOUT -->
                     <colgroup><col><col><col></colgroup>
                     <colgroup><col><col><col></colgroup>
                     <colgroup><col><col><col></colgroup>
-
+                    <!-- GRID contains 9 rows, each contains 9 input cells, numbered from 1 to 81
+                         
+                    GRIDD Generated using EMMET abbreviation, below:
+                    tbody[class="grid" id=$]>tr*3>td[class="cell" id=$]*9 
+                    tbody[class="grid" id="1"]*3>tr[class="row" id=$]*3>td[class="cell" id=$]*9>input[class="input" id=$ type="input" maxlength="1" onclick="sel($)"]-->
+                    
+                    <!-- When cell selected runs sel function to tell javascript which cell is selected -->
+                    
                     <tbody class="grid" id="grid1">
                       <tr class="row" id="1row1">
                           <td class="cell" id="cell1"><div class="clear" id="c1"><input type="input" maxlength="1" class="input" id="1" onclick="sel(1)"></div></td>
@@ -141,12 +151,16 @@
                     tbody[class="grid" id="1"]*3>tr[class="row" id=$]*3>td[class="cell" id=$]*9>input[class="input" id=$ type="input" maxlength="1" onclick="sel($, $)"]-->
                 </table>
             </div>
+            <!-- NUMBER PAD -->
             <div class="keyDiv">        
                 <table  class="keypad">
+                    <!-- Table Layout -->
                     <colgroup><col><col><col></colgroup>
                     <colgroup><col><col><col></colgroup>
                     <colgroup><col><col><col></colgroup>
                     <tbody>    
+                       <!-- Table contains three rows of buttons, 1 - 9 -->
+                       <!-- Button click runs the press function, submitting the button's value --> 
                         <tr class="trnum">
                             <td><input type="button" class="num" id="press1" value="1" onclick="press(1)"></td>
                             <td><input type="button" class="num" id="press2" value="2" onclick="press(2)"></td>  
@@ -165,8 +179,10 @@
                 </table>
             </div>
         </div> 
+        <!-- OUTPUT -->
         <p class="gridStatus" id="stat"></p>
     </body>
+    <!-- Script -->
     <script id="p" src="main.js"></script>
     <script src="grid.js"></script>
 </html>

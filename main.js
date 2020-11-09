@@ -18,6 +18,9 @@ Complex Programming Techniques
     - Uses classes and objects to store grid and cells - object orientated
     - Uses Types - In JS done by essentinaly just using the variables...
     
+- Boundary, Data validilty
+    - Using HTML form, I have disable default submit and used input type, min and max to check if data is valid
+    
 */
 
 //Selected and previously selected cells
