@@ -1,9 +1,35 @@
+/*
+Properly commented!
+
+Complex Programming Techniques
+- Two or more data structures, uses
+    - standard variables/constants
+    - booleans
+    - arrays
+    - objects
+    
+- Iteration contrl structures, sequence selection
+    - for and forEach loops EVERYWHERE
+
+- Takes input from user, checks to see whether grid is solved and returns output
+
+- Complex Techniques
+    - Uses HTML DOM as GUI, using javascript to generate elements, and styles
+    - Uses classes and objects to store grid and cells - object orientated
+    - Uses Types - In JS done by essentinaly just using the variables...
+    
+- All inputs are checked for validity in this program, eg, around line
+*/
+
+//Selected and previously selected cells
 let cell;
 let previous = id("p"); 
-
 let solved = "";
+
+/* Recives id of element and returns the HTML DOM element */
 function id(id){return document.getElementById(id)}
 
+//Fills the empty grid object with "" 
 function fillEmpty(g) {
     for (i = 0; i < 9; i++) {
         for (j = 0; j < 9; j++) {
@@ -18,29 +44,53 @@ function fillEmpty(g) {
     }
 }
 
+//Cell Class for individual cells
+class Cell {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+}
+//Grid Object
 let grid = {
     rows:[[], [], [], [], [], [], [], [], []],
     columns:[[], [], [], [], [], [], [], [], []],
     boxes:[[], [], [], [], [], [], [], [], []]
 }
     
+//GRID DATA STRUCTURE 
+/*
+    GRID OBJECT
+        GRID.ROWS
+            ARRAY FOR EACH ROW containing 9 elements
+        GRID.COLUMNS
+            ARRAY FOR EACH COLUMN containing 9 elements
+        GIRD.BOXES
+            ARRAY FOR EACH BOX containing 9 elements
+*/
+//Fills Grid
 fillEmpty(grid);
 
+//Event listener to check if a cell is changed
 document.querySelectorAll('.input').forEach(item => {
     item.addEventListener('input', changed, event); 
 });
 
 let nums = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
+/* When cell changed, check whether input is a valid number between 
+1 and 9, by checking if it is contained in the nums array */
 function changed() {
     let e = event.target.value;
-    if (nums.includes(e)) {
+    if (nums.includes(e)) { //If Valid
         change(event.target.id, e);
     }
-    else {
+    else { //If invalid set cell value to empty
         id(event.target.id).value = "";
     }
 }
 
+/* Takes the cell id and converts to its row, column and box position, then adds to grid object*/
 function change(val1, val2) {
     let cellN = val1;
     let cellV = val2;
@@ -50,7 +100,7 @@ function change(val1, val2) {
     let cellBR = Math.floor(cellR / 3); 
     let cellB = cellBC + (cellBR*3);
     let cellBX = ((cellN - 1) % 3);
-    let cellBY = ((cellR) % 3);//Math.floor((cellC) / 3);
+    let cellBY = ((cellR) % 3);
     let cellBN = cellBX + (cellBY * 3);
  
     grid.columns[cellC][cellR] = cellV;
@@ -58,9 +108,9 @@ function change(val1, val2) {
     grid.boxes[cellB][cellBN] = cellV;
 }
 
+//When Cell selected, set selected cell and previously selected cell
 function sel(val) {
     cell = id(val);
-    
     console.log(val);
     if (!id(val).readOnly) {
         //cell.style.backgroundColor = "rgba(150, 150, 150, 0.5)";
@@ -69,6 +119,7 @@ function sel(val) {
     previous = cell;
 }
 
+//When Number on keypad pressed, change selected cell value to number pressed
 function press(val) {
     if (!id(val).readOnly) {
         if (val > 0) {
@@ -82,6 +133,7 @@ function press(val) {
     }
 }
 
+//Sets all cells to empty and removes all readonly attributes
 function clearGrid() {
     for (c = 1; c <= 81; c++) {
         id("cell" + c).children[0].children[0].value = "";
@@ -90,18 +142,20 @@ function clearGrid() {
     }
 }
 
+//When Undo/Redo Pressed, simulate undo/redo command to undo/redo most recent input
 function doUndo(){
   document.execCommand('undo', false, null);
 }
-
 function doRedo(){
   document.execCommand('redo', false, null);
 }
 
+//Generate a random number in range 
 function randomNum(r) {
     return Math.floor(Math.random() * r) + 1;
 }
-        
+    
+//Fill each cell with a random number
 function fill() {
     for (i = 0; i < 81; i++) {
         var val = randomNum(9);
@@ -109,25 +163,35 @@ function fill() {
     }
 }
 
+//Checks Whether sudoku is completed
 function check(sud) {
     let r = true;
     let c = true;
     let b = true;
     let total = 0;
     
+    /*
+    For Each Row, Column or Box, count the total of each number 
+    If more than one of any number in a row column or box, sudoku is not complete
+    */
+    
     //Check Rows
     for (i = 0; i < 9; i++) {
+        //Array to store the number of each element for each row
         let arr = [0, 0, 0, 0, 0, 0, 0, 0, 0];
         arr.length = 9;
         sud.rows[i].forEach(e => {
            if (e != "") {
+               //Counts number of un-empty cells
                total++;
            }
+           //increments array at index of value
            arr[e - 1] += 1; 
         });
         count = 0;
         arr.forEach(e => {
             count++;
+            //If more than one of the same element invalid row
             if (e > 1) {
                 console.log("Invalid Row", i, "Found: ", e, count, "'s");
                 r = false;
@@ -135,7 +199,7 @@ function check(sud) {
         });
     }
     
-    //Check Cols
+    //Check Cols - same logic as above
     for (i = 0; i < 9; i++) {
         let arr = [0, 0, 0, 0, 0, 0, 0, 0, 0];
         arr.length = 9;
@@ -152,7 +216,7 @@ function check(sud) {
         });
     }
             
-    //Check Boxes
+    //Check Boxes - same logic as above
     for (i = 0; i < 9; i++) {
         let arr = [0, 0, 0, 0, 0, 0, 0, 0, 0];
         arr.length = 9;
@@ -169,11 +233,13 @@ function check(sud) {
         });
     }
     
+    //If 81 values are present, and all rows columns and boxes are valid - Sudoku is solved
     if (total == 81 && r & c & b) {
         console.log("SUDOKU SOLVED!");
         id("stat").innerHTML = "SUDOKU SOLVED!";
         id("stat").style.color = "green";
     }
+    //Else, show error message
     else {
         console.log("ERROR NO GOOD", total, r, c, b);
         if (total == 81) {
@@ -188,6 +254,8 @@ function check(sud) {
 }
 
 function gen() {
+    //Template sudoku to shuffle
+    //DefSud - definite solveable sudoku
     let defSud = {
         rows:[
             ["1", "3", "5", "7", "9", "2", "4", "6", "8"],
@@ -217,6 +285,12 @@ function gen() {
     }
     
     //SWAP A BUNCH OF RANDOM NUMBERS
+    /*
+    Generates 2 random numbers
+    Replaces all of the first number with 0's
+    Replaces all of the second number with the first 
+    Replaces all of the 0's with the second number
+    */
     for (i = 0; i < 9; i++) {
         let num1 = randomNum(9);
         let num2 = randomNum(9);
@@ -265,13 +339,17 @@ function gen() {
     }
     
     //REMOVE A BUNCH OF THINGS
+    /*
+    Removes a random element from the grid
+    Grid starts as a solveable grid so will always be solveable
+    */
     let diff = id("diff").value;
     let numR = diff;
     let used = [];
     for (i = 0; i < numR; i++) {
-        let cellRand = randomNum(81);
+        let cellRand = randomNum(81); //Random cell
         if (!used.includes(cellRand)) {
-            used.push(cellRand);
+            used.push(cellRand); //Array to store already removed cells
             //GET CELL COL / ROW
             let cellC = ((cellRand - 1) % 9);
             let cellR = Math.floor(cellRand / 9.1);
@@ -282,8 +360,17 @@ function gen() {
     }
     
     //SWAP A BUNCH OF ROWS AND COLUMNS
+    /*
+    Selects randomly between row/column to swap
+    Generates a random row or column within a box to swap
+    Adds all elements from row 1 to temp array
+    Adds all elements from row 2 to row 1
+    Adds all elements from temp array to row 1
+    
+    Repeats 300 times to ensure it is well shuffled
+    */
     for (i = 0; i < 300; i++) {
-        let type = randomNum(2); 
+        let type = randomNum(2); //Row or Column
         let swapbox = randomNum(3) - 1;
         let swap1 = randomNum(3) - 1;
         let swap2 = randomNum(3) - 1;
@@ -318,6 +405,8 @@ function gen() {
     }   
 
     //FILL BOXES
+    //Populates the boxes object, with using rows object
+    //Gets the first three elements of the first, second and third rows, then 3rd 4th and 5th elements of each row and adds to box array
     let count = 0;
     for (j = 0; j < 3; j++) {
         for (i = 0; i < 3; i++) {
@@ -339,16 +428,22 @@ function gen() {
     drawGrid(defSud);
 }
 
+//Get random number between min and max values
 function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+//Updates each html element with its value from the grid object
 function drawGrid(s) {
     grid = s;
     let count = 1;
     let rowC = 0;
+    /*
+    For each row, For each element, get the elements value. 
+    If cell is empty, set readonly property to false else if cell is default, set background color, and readonly to true
+    */
     s.rows.forEach(e => {
         for (j = 0; j < 9; j++) {
             v = e[j];
