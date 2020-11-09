@@ -18,7 +18,6 @@ Complex Programming Techniques
     - Uses classes and objects to store grid and cells - object orientated
     - Uses Types - In JS done by essentinaly just using the variables...
     
-- All inputs are checked for validity in this program, eg, around line
 */
 
 //Selected and previously selected cells
@@ -29,7 +28,7 @@ let solved = "";
 /* Recives id of element and returns the HTML DOM element */
 function id(id){return document.getElementById(id)}
 
-//Fills the empty grid object with "" 
+//Fills the empty grid object's rows columns and boxes with empty string ""
 function fillEmpty(g) {
     for (i = 0; i < 9; i++) {
         for (j = 0; j < 9; j++) {
@@ -90,7 +89,7 @@ function changed() {
     }
 }
 
-/* Takes the cell id and converts to its row, column and box position, then adds to grid object*/
+/* Takes the cell id and converts to its row, column and box position, then adds to the grid object*/
 function change(val1, val2) {
     let cellN = val1;
     let cellV = val2;
