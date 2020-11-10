@@ -112,17 +112,18 @@ function change(val1, val2) {
 
 //When Cell selected, set selected cell and previously selected cell
 function sel(val) {
-    cell = id(val);
-    console.log(val);
     if (!id(val).readOnly) {
-        //cell.style.backgroundColor = "rgba(150, 150, 150, 0.5)";
-        //previous.style.backgroundColor = "rgba(255, 255, 255, 0.5)";
+        cell = id(val);
+        console.log(val);
+        cell.style.backgroundColor = "rgba(150, 150, 150, 0.5)";
+        previous.style.backgroundColor = "rgba(255, 255, 255, 0.5)";
     }
     previous = cell;
 }
 
 //When Number on keypad pressed, change selected cell value to number pressed
 function press(val) {
+    console.log(id(val));
     if (!id(val).readOnly) {
         if (val > 0) {
             cell.value = val;
